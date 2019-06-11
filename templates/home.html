@@ -71,7 +71,8 @@ width:100%;
     <!--<div id="logo" class="text-center">-->
     <!--<h1>This is Logo</h1><p>Slogan of thematic</p>-->
     <!--</div>-->
-      <form role="form" id="form-buscar" class="container center-div">
+      <form  method="POST" action="contact" role="form" id="form-buscar" class="container center-div">
+       {% csrf_token %}
         <div class="form-group">
           <div class="input-group">
             <input id="1" class="form-control" type="text" name="search" placeholder="Search..." required/>

@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.db import connection
 
 # Create your views here.
 
@@ -11,6 +12,12 @@ def create(request):
     print(request.method)
     if request.method == "POST":
         input_text = request.POST['search']
-        print(input_text)
-        print('*'*50)
-        return HttpResponse("welcome")
+        cursor = connection.cursor()
+        cursor.execute("SELECT city_name FROM users_dataschema where company_name=%s", [input_text])
+        row = cursor.fetchall()
+        if row:
+            print(row)
+        else:
+            return HttpResponse("No such Data Available")
+        return HttpResponse(row)
+

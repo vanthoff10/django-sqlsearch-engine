@@ -4,6 +4,7 @@
       <w>dataschema</w>
       <w>endblock</w>
       <w>endfor</w>
+      <w>savedata</w>
     </words>
   </dictionary>
 </component>

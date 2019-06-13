@@ -18,8 +18,9 @@ def create(request):
     if request.method == "POST":
         input_text = request.POST['search']
         cursor = connection.cursor()
-        cursor.execute("SELECT company_name,company_url, company_email, f_name, l_name, city_name  FROM users_dataschema where company_name or company_url=%s", [input_text])
+        cursor.execute("SELECT company_name,company_url, company_email, f_name, l_name, city_name  FROM users_dataschema where company_name =%s", [input_text])
         data = cursor.fetchall()
+        pprint(data)
         for item in data:
             x.extend(item)
         # alldata = DataSchema.objects.all()
@@ -28,5 +29,6 @@ def create(request):
             return TemplateResponse(request, 'home.html', {'data': x})
             # return HttpResponse(row)
         else:
-            return HttpResponse("No such Data Available")
+            # return HttpResponse("No such Data Available")
+            return TemplateResponse(request, 'home.html', {'data': x})
 

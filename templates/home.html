@@ -111,13 +111,24 @@ input[type="text"] {
 .data_header_text {
   text-align: center;
 }
+
+.logout-text {
+  font-size:15px;
+}
+
+.border-class {
+  border: 2px solid #999999;
+  background-color: #222222;
+  padding-top:15px;
+}
+
 </style>
 
 {% if user.is_authenticated %}
   <nav class="navbar navbar-light bg-light">
     <span class="navbar-brand mb-0 font-weight-bold nav-text">Lead Generation</span>
     <span class=" text-muted username-text">Hi {{ user.username }}!
-       <p class="text-right h6"><a href="{% url 'logout' %}">logout</a></p>
+       <p class="text-right logout-text"><a href="{% url 'logout' %}">logout</a></p>
     </span>
   </nav>
 
@@ -127,9 +138,9 @@ input[type="text"] {
 
 
 
-<div class="container" style="margin-top: 8%;">
-  <div class="col-md-12 col-md-offset-3">
-    <div class="row">
+<div class="col-8  border-class container" style="margin-top: 8%;">
+  <div class=" col-md-12 col-md-offset-3">
+    <div class=" row">
     <!--<div id="logo" class="text-center">-->
     <!--<h1>This is Logo</h1><p>Slogan of thematic</p>-->
     <!--</div>-->

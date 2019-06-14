@@ -12,7 +12,7 @@ class DataSchema(models.Model):
     city_name = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.company_name
+        return True
 
 
 class FormData(models.Model):
@@ -32,7 +32,5 @@ class FormData(models.Model):
     owner_title = models.CharField(max_length=100)
     owner_twitter = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.company_name
 
 

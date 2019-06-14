@@ -1,9 +1,9 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponseRedirect
 from django.db import connection
 from pprint import pprint
 from django.template.response import TemplateResponse
 from django.shortcuts import render_to_response
-from .models import FormData
+from .models import FormData, DataSchema
 
 
 # Create your views here.
@@ -39,7 +39,8 @@ def savedata(request):
 
     if request.method == "POST":
 
-        formData_obj = FormData
+        formdata_obj = FormData()
+        dataschema_obj = DataSchema()
 
         datafield1 = request.POST['data1']
         datafield2 = request.POST['data2']
@@ -58,22 +59,33 @@ def savedata(request):
         datafield15 = request.POST['data15']
         datafield16 = request.POST['data16']
 
-        formData_obj.lead_gen = datafield1
-        formData_obj.company_name = datafield2
-        formData_obj.company_address = datafield3
-        formData_obj.company_city = datafield4
-        formData_obj.company_state = datafield5
-        formData_obj.company_country = datafield6
-        formData_obj.company_url = datafield7
-        formData_obj.company_linkedin = datafield8
-        formData_obj.company_phone = datafield9
-        formData_obj.company_email = datafield10
-        formData_obj.f_name = datafield11
-        formData_obj.l_name = datafield12
-        formData_obj.owner_linkedin = datafield13
-        formData_obj.owner_title = datafield14
+        # Form info save to users_formdata DB
 
-        formData_obj.save(request)
+        formdata_obj.lead_gen = datafield1
+        formdata_obj.company_name = datafield2
+        formdata_obj.company_address = datafield3
+        formdata_obj.company_city = datafield4
+        formdata_obj.company_state = datafield5
+        formdata_obj.company_country = datafield6
+        formdata_obj.company_url = datafield7
+        formdata_obj.company_linkedin = datafield8
+        formdata_obj.company_phone = datafield9
+        formdata_obj.company_email = datafield10
+        formdata_obj.f_name = datafield11
+        formdata_obj.l_name = datafield12
+        formdata_obj.owner_linkedin = datafield13
+        formdata_obj.owner_title = datafield14
+
+        # Form info save to users_formdata DB
+        dataschema_obj.company_name = datafield2
+        dataschema_obj.company_url = datafield7
+        dataschema_obj.company_email = datafield10
+        dataschema_obj.f_name = datafield11
+        dataschema_obj.l_name = datafield12
+        dataschema_obj.city_name = datafield4
+
+        formdata_obj.save()
+        dataschema_obj.save()
 
         return TemplateResponse(request, 'home.html')
 

@@ -1,0 +1,86 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'install', 'pip3' ]
+2 info using npm@3.5.2
+3 info using node@v4.2.6
+4 verbose config Skipping project config: /home/ashwinpanwar/.npmrc. (matches userconfig)
+5 silly loadCurrentTree Starting
+6 silly install loadCurrentTree
+7 silly install readLocalPackageData
+8 silly fetchPackageMetaData pip3
+9 silly fetchNamedPackageData pip3
+10 silly mapToRegistry name pip3
+11 silly mapToRegistry using default registry
+12 silly mapToRegistry registry https://registry.npmjs.org/
+13 silly mapToRegistry uri https://registry.npmjs.org/pip3
+14 verbose request uri https://registry.npmjs.org/pip3
+15 verbose request no auth needed
+16 info attempt registry request try #1 at 4:05:14 PM
+17 verbose request id e3e512627d65779c
+18 http request GET https://registry.npmjs.org/pip3
+19 http 404 https://registry.npmjs.org/pip3
+20 verbose headers { date: 'Mon, 10 Jun 2019 10:35:15 GMT',
+20 verbose headers   'content-type': 'application/json',
+20 verbose headers   'content-length': '21',
+20 verbose headers   connection: 'keep-alive',
+20 verbose headers   'set-cookie': [ '__cfduid=d3ca74b37a18ea9eb8cc648d28a03f1c41560162914; expires=Tue, 09-Jun-20 10:35:14 GMT; path=/; domain=.npmjs.org; HttpOnly' ],
+20 verbose headers   'cf-cache-status': 'MISS',
+20 verbose headers   'cache-control': 'max-age=300',
+20 verbose headers   'cf-ray': '4e4ab2874ecf8a83-BOM',
+20 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+20 verbose headers   vary: 'accept-encoding, accept',
+20 verbose headers   server: 'cloudflare' }
+21 silly get cb [ 404,
+21 silly get   { date: 'Mon, 10 Jun 2019 10:35:15 GMT',
+21 silly get     'content-type': 'application/json',
+21 silly get     'content-length': '21',
+21 silly get     connection: 'keep-alive',
+21 silly get     'set-cookie': [ '__cfduid=d3ca74b37a18ea9eb8cc648d28a03f1c41560162914; expires=Tue, 09-Jun-20 10:35:14 GMT; path=/; domain=.npmjs.org; HttpOnly' ],
+21 silly get     'cf-cache-status': 'MISS',
+21 silly get     'cache-control': 'max-age=300',
+21 silly get     'cf-ray': '4e4ab2874ecf8a83-BOM',
+21 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+21 silly get     vary: 'accept-encoding, accept',
+21 silly get     server: 'cloudflare' } ]
+22 silly fetchPackageMetaData Error: Not found : pip3
+22 silly fetchPackageMetaData     at makeError (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+22 silly fetchPackageMetaData     at CachingRegistryClient.<anonymous> (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+22 silly fetchPackageMetaData     at Request._callback (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+22 silly fetchPackageMetaData     at Request.self.callback (/usr/share/npm/node_modules/request/request.js:198:22)
+22 silly fetchPackageMetaData     at emitTwo (events.js:87:13)
+22 silly fetchPackageMetaData     at Request.emit (events.js:172:7)
+22 silly fetchPackageMetaData     at Request.<anonymous> (/usr/share/npm/node_modules/request/request.js:1082:10)
+22 silly fetchPackageMetaData     at emitOne (events.js:82:20)
+22 silly fetchPackageMetaData     at Request.emit (events.js:169:7)
+22 silly fetchPackageMetaData     at IncomingMessage.<anonymous> (/usr/share/npm/node_modules/request/request.js:1009:12)
+22 silly fetchPackageMetaData  error for pip3 { [Error: Not found : pip3] pkgid: 'pip3', statusCode: 404, code: 'E404' }
+23 silly rollbackFailedOptional Starting
+24 silly rollbackFailedOptional Finishing
+25 silly runTopLevelLifecycles Starting
+26 silly runTopLevelLifecycles Finishing
+27 silly install printInstalled
+28 verbose stack Error: Not found : pip3
+28 verbose stack     at makeError (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+28 verbose stack     at CachingRegistryClient.<anonymous> (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+28 verbose stack     at Request._callback (/usr/share/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+28 verbose stack     at Request.self.callback (/usr/share/npm/node_modules/request/request.js:198:22)
+28 verbose stack     at emitTwo (events.js:87:13)
+28 verbose stack     at Request.emit (events.js:172:7)
+28 verbose stack     at Request.<anonymous> (/usr/share/npm/node_modules/request/request.js:1082:10)
+28 verbose stack     at emitOne (events.js:82:20)
+28 verbose stack     at Request.emit (events.js:169:7)
+28 verbose stack     at IncomingMessage.<anonymous> (/usr/share/npm/node_modules/request/request.js:1009:12)
+29 verbose statusCode 404
+30 verbose pkgid pip3
+31 verbose cwd /home/ashwinpanwar/Desktop/accounts/my_project
+32 error Linux 4.13.0-36-generic
+33 error argv "/usr/bin/nodejs" "/usr/bin/npm" "install" "pip3"
+34 error node v4.2.6
+35 error npm  v3.5.2
+36 error code E404
+37 error 404 Not found : pip3
+38 error 404
+39 error 404 'pip3' is not in the npm registry.
+40 error 404 You should bug the author to publish it (or use the name yourself!)
+41 error 404 Note that you can also install from a
+42 error 404 tarball, folder, http url, or git url.
+43 verbose exit [ 1, true ]

@@ -45,7 +45,8 @@ def create(request):
         print(data)
         for item in data:
             x.extend(item)
-        # alldata = DataSchema.objects.all()
+        alldata = DataSchema.objects.all()
+        print(alldata)
 
         if data:
             return TemplateResponse(request, 'home.html', {'data': x})

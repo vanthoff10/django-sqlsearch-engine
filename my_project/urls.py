@@ -25,5 +25,8 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('contact', views.create, name='contact_data'),
     path('form', views.savedata, name='save_data'),
+<<<<<<< HEAD
     path('sheetapi/', views.main, name='main'),
+=======
+>>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
 ]

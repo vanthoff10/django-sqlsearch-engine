@@ -82,7 +82,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lead_db',
         'USER': 'root',
+<<<<<<< HEAD
         'PASSWORD': '',
+=======
+        'PASSWORD': 'root',
+>>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
         'HOST': 'localhost',
     }
 }

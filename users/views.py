@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from __future__ import print_function
 import pickle
 import os.path
@@ -7,6 +8,9 @@ from google.auth.transport.requests import Request
 
 
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
+=======
+from django.shortcuts import render, HttpResponseRedirect
+>>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
 from django.db import connection
 from pprint import pprint
 from django.template.response import TemplateResponse
@@ -16,6 +20,7 @@ from .models import FormData, DataSchema
 
 # Create your views here.
 
+<<<<<<< HEAD
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
@@ -28,6 +33,8 @@ SAMPLE_RANGE_MATT = 'S3:X'
 SAMPLE_RANGE_ORG = 'Y3:AD'
 SAMPLE_RANGE_ECLIENTS = 'AE3:AF'
 
+=======
+>>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
 
 def index(request):
     return render(request)
@@ -42,6 +49,7 @@ def create(request):
         cursor = connection.cursor()
         cursor.execute("SELECT company_name,company_url, company_email, f_name, l_name, city_name  FROM users_dataschema where company_name =%s", [input_text])
         data = cursor.fetchall()
+<<<<<<< HEAD
         print(data)
         for item in data:
             x.extend(item)
@@ -49,6 +57,13 @@ def create(request):
         print(alldata)
 
         if data:
+=======
+        for item in data:
+            x.extend(item)
+        # alldata = DataSchema.objects.all()
+        if data:
+            print(x)
+>>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
             return TemplateResponse(request, 'home.html', {'data': x})
             # return HttpResponse(row)
         else:
@@ -112,6 +127,7 @@ def savedata(request):
         return TemplateResponse(request, 'home.html')
 
 
+<<<<<<< HEAD
 def main(request):
     """Shows basic usage of the Sheets API.
     Prints values from a sample spreadsheet.
@@ -300,4 +316,6 @@ def main(request):
 
 
 
+=======
+>>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
 

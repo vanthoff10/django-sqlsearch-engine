@@ -20,8 +20,12 @@ width:100%;
 #logo h1 {
     font-size: 60px;
     text-shadow: 1px 2px 3px #999;
+<<<<<<< HEAD
     font-family: Roboto, san
     s-serif;
+=======
+    font-family: Roboto, sans-serif;
+>>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
     font-weight: 700;
     letter-spacing: -1px;
 }
@@ -163,6 +167,7 @@ input[type="text"] {
   </div>
 </div>
 
+<<<<<<< HEAD
 <div class="container">
 
   {% for try in info %}
@@ -172,6 +177,8 @@ input[type="text"] {
 
 </div>
 
+=======
+>>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
 <div class="container" style="margin-top: 8%;">
   {% if data %}
         <h5 class="data_header_text">List Of Companies </h5>
@@ -188,7 +195,11 @@ input[type="text"] {
           <tr>
             <th class="text" scope="row">1</th>
             {% for data1 in data %}
+<<<<<<< HEAD
                 <td class="data_text">{{ data1 }}</td>
+=======
+                <td class="data_text">{{ data1}}</td>
+>>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
             {% endfor %}
            </tr>
         </table>
@@ -274,7 +285,10 @@ input[type="text"] {
   {% endif %}
 </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
 {% else %}
   <p class="text-center">You are not logged in</p>
   <p class="text-center"><a href="{% url 'login' %}">login</a></p>

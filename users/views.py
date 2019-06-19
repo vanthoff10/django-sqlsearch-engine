@@ -23,9 +23,10 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 SAMPLE_SPREADSHEET_ID = '1buqR2OkUJdPA63NYh2WZWRoCQ4-P_8JP-7vogko3oYA'
 SAMPLE_RANGE_NAME = 'A3:F'
 SAMPLE_RANGE_GREG = 'G3:L'
-
-
-
+SAMPLE_RANGE_KEVIN = 'M3:R'
+SAMPLE_RANGE_MATT = 'S3:X'
+SAMPLE_RANGE_ORG = 'Y3:AD'
+SAMPLE_RANGE_ECLIENTS = 'AE3:AF'
 
 
 def index(request):
@@ -45,6 +46,7 @@ def create(request):
         for item in data:
             x.extend(item)
         # alldata = DataSchema.objects.all()
+
         if data:
             return TemplateResponse(request, 'home.html', {'data': x})
             # return HttpResponse(row)
@@ -144,15 +146,55 @@ def main(request):
     result2 = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                 range=SAMPLE_RANGE_GREG).execute()
 
+    # for kevin
+    result3 = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                range=SAMPLE_RANGE_KEVIN).execute()
+
+    # for matt
+    result4 = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                 range=SAMPLE_RANGE_MATT).execute()
+
+    # for organizations
+    result5 = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                 range=SAMPLE_RANGE_ORG).execute()
+
+    # for existing clients
+    result6 = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                 range=SAMPLE_RANGE_ECLIENTS).execute()
+
     values = result.get('values', [])
     values_greg = result2.get('values', [])
+    values_kevin = result3.get('values', [])
+    values_matt = result4.get('values', [])
+    values_org = result5.get('values', [])
+    values_eclients = result6.get('values', [])
 
     if not values:
         print('No data found.')
     else:
-        print('Name, Major:')
+        print('Fetching Data of GABE from DB')
 
         for row in values:
+            sheetdata_obj = DataSchema()
+            try:
+                if row:
+                    sheetdata_obj.company_name = row[0]
+                    sheetdata_obj.company_url = row[1]
+                    sheetdata_obj.company_email = row[2]
+                    sheetdata_obj.f_name = row[3]
+                    sheetdata_obj.l_name = row[4]
+                    sheetdata_obj.city_name = row[5]
+            except IndexError:
+                pass
+
+            sheetdata_obj.save()
+
+    if not values_kevin:
+        print('No data found.')
+    else:
+        print('Fetching Data of GREG from DB')
+
+        for row in values_kevin:
             sheetdata_obj = DataSchema()
             try:
                 if row:
@@ -170,7 +212,7 @@ def main(request):
     if not values_greg:
         print('No data found.')
     else:
-        print('Name, Major:')
+        print('Fetching Data of KEVIN from DB')
 
         for row in values_greg:
             sheetdata_obj = DataSchema()
@@ -187,8 +229,67 @@ def main(request):
 
             sheetdata_obj.save()
 
-    return TemplateResponse(request, 'home.html', {'info': values_greg})
+    if not values_matt:
+        print('No data found.')
+    else:
+        print('Fetching Data of MATT from DB')
 
+        for row in values_matt:
+            sheetdata_obj = DataSchema()
+            try:
+                if row:
+                    sheetdata_obj.company_name = row[0]
+                    sheetdata_obj.company_url = row[1]
+                    sheetdata_obj.company_email = row[2]
+                    sheetdata_obj.f_name = row[3]
+                    sheetdata_obj.l_name = row[4]
+                    sheetdata_obj.city_name = row[5]
+            except IndexError:
+                pass
+
+            sheetdata_obj.save()
+
+    if not values_org:
+        print('No data found.')
+    else:
+        print('Fetching Data of ORGANIZATIONS from DB')
+
+        for row in values_org:
+            sheetdata_obj = DataSchema()
+            try:
+                if row:
+                    sheetdata_obj.company_name = row[0]
+                    sheetdata_obj.company_url = row[1]
+                    sheetdata_obj.company_email = row[2]
+                    sheetdata_obj.f_name = row[3]
+                    sheetdata_obj.l_name = row[4]
+                    sheetdata_obj.city_name = row[5]
+            except IndexError:
+                pass
+
+            sheetdata_obj.save()
+
+    if not values_eclients:
+        print('No data found.')
+    else:
+        print('Fetching Data of EXISTING CLIENTS from DB')
+
+        for row in values_eclients:
+            sheetdata_obj = DataSchema()
+            try:
+                if row:
+                    sheetdata_obj.company_name = row[0]
+                    sheetdata_obj.company_email = row[1]
+                    # sheetdata_obj.company_email = row[2]
+                    # sheetdata_obj.f_name = row[3]
+                    # sheetdata_obj.l_name = row[4]
+                    # sheetdata_obj.city_name = row[5]
+            except IndexError:
+                pass
+
+            sheetdata_obj.save()
+
+    return TemplateResponse(request, 'home.html', {'info': values_greg})
 
 
         # for row in values:

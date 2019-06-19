@@ -6,7 +6,7 @@ from django.db import models
 class DataSchema(models.Model):
     company_name = models.CharField(max_length=100)
     company_url = models.CharField(max_length=200)
-    company_email = models.EmailField(max_length=100)
+    company_email = models.EmailField(max_length=200)
     f_name = models.CharField(max_length=100)
     l_name = models.CharField(max_length=100)
     city_name = models.CharField(max_length=100)

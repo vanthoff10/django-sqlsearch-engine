@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from __future__ import print_function
 import pickle
 import os.path
@@ -6,21 +5,12 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-
-from django.shortcuts import render, HttpResponseRedirect, HttpResponse
-=======
-from django.shortcuts import render, HttpResponseRedirect
->>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
-from django.db import connection
-from pprint import pprint
+from django.shortcuts import render
 from django.template.response import TemplateResponse
-from django.shortcuts import render_to_response
 from .models import FormData, DataSchema
 
 
 # Create your views here.
-
-<<<<<<< HEAD
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
@@ -33,50 +23,26 @@ SAMPLE_RANGE_MATT = 'S3:X'
 SAMPLE_RANGE_ORG = 'Y3:AD'
 SAMPLE_RANGE_ECLIENTS = 'AE3:AF'
 
-=======
->>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
 
 def index(request):
     return render(request)
 
 
 def create(request):
-    x = []
-    print(request.method)
     if request.method == "POST":
         input_text = request.POST['search']
         value_text = request.POST['prodId']
-        cursor = connection.cursor()
-        cursor.execute("SELECT company_name,company_url, company_email, f_name, l_name, city_name  FROM users_dataschema where company_name =%s", [input_text])
-        data = cursor.fetchall()
-<<<<<<< HEAD
-        print(data)
-        for item in data:
-            x.extend(item)
-        alldata = DataSchema.objects.all()
-        print(alldata)
-
-        if data:
-=======
-        for item in data:
-            x.extend(item)
-        # alldata = DataSchema.objects.all()
-        if data:
-            print(x)
->>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
-            return TemplateResponse(request, 'home.html', {'data': x})
-            # return HttpResponse(row)
+        all_data = DataSchema.objects.filter(company_name__icontains=input_text).values('company_name', 'company_url', 'company_email', 'f_name', 'l_name', 'city_name')
+        if all_data:
+            return TemplateResponse(request, 'home.html', {'data': all_data})
         else:
-            # return HttpResponse("No such Data Available")
             return TemplateResponse(request, 'home.html', {'data_value': value_text})
 
 
 def savedata(request):
-    print(request.method)
-
     if request.method == "POST":
 
-        formdata_obj = FormData()
+        form_data_obj = FormData()
         dataschema_obj = DataSchema()
 
         datafield1 = request.POST['data1']
@@ -98,20 +64,20 @@ def savedata(request):
 
         # Form info save to users_formdata DB
 
-        formdata_obj.lead_gen = datafield1
-        formdata_obj.company_name = datafield2
-        formdata_obj.company_address = datafield3
-        formdata_obj.company_city = datafield4
-        formdata_obj.company_state = datafield5
-        formdata_obj.company_country = datafield6
-        formdata_obj.company_url = datafield7
-        formdata_obj.company_linkedin = datafield8
-        formdata_obj.company_phone = datafield9
-        formdata_obj.company_email = datafield10
-        formdata_obj.f_name = datafield11
-        formdata_obj.l_name = datafield12
-        formdata_obj.owner_linkedin = datafield13
-        formdata_obj.owner_title = datafield14
+        form_data_obj.lead_gen = datafield1
+        form_data_obj.company_name = datafield2
+        form_data_obj.company_address = datafield3
+        form_data_obj.company_city = datafield4
+        form_data_obj.company_state = datafield5
+        form_data_obj.company_country = datafield6
+        form_data_obj.company_url = datafield7
+        form_data_obj.company_linkedin = datafield8
+        form_data_obj.company_phone = datafield9
+        form_data_obj.company_email = datafield10
+        form_data_obj.f_name = datafield11
+        form_data_obj.l_name = datafield12
+        form_data_obj.owner_linkedin = datafield13
+        form_data_obj.owner_title = datafield14
 
         # Form info save to users_formdata DB
         dataschema_obj.company_name = datafield2
@@ -121,13 +87,12 @@ def savedata(request):
         dataschema_obj.l_name = datafield12
         dataschema_obj.city_name = datafield4
 
-        formdata_obj.save()
+        form_data_obj.save()
         dataschema_obj.save()
 
         return TemplateResponse(request, 'home.html')
 
 
-<<<<<<< HEAD
 def main(request):
     """Shows basic usage of the Sheets API.
     Prints values from a sample spreadsheet.
@@ -297,10 +262,6 @@ def main(request):
                 if row:
                     sheetdata_obj.company_name = row[0]
                     sheetdata_obj.company_email = row[1]
-                    # sheetdata_obj.company_email = row[2]
-                    # sheetdata_obj.f_name = row[3]
-                    # sheetdata_obj.l_name = row[4]
-                    # sheetdata_obj.city_name = row[5]
             except IndexError:
                 pass
 
@@ -308,14 +269,4 @@ def main(request):
 
     return TemplateResponse(request, 'home.html', {'info': values_greg})
 
-
-        # for row in values:
-        #     # Print columns A and E, which correspond to indices 0 and 4.
-        #     print('%s, %s' % (row[0], row[4]))
-
-
-
-
-=======
->>>>>>> 4ff1fdf2c7e84dd487e5244af494e6b32072dc1f
 

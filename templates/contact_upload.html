@@ -17,12 +17,16 @@
 .form-upload {
     margin: 25px;
 }
+
+a{
+    color: white;
+}
 </style>
 
 {% if messages %}
     {% for message in messages %}
-        <div>
-            <strong>{{ message|safe }}</strong>
+        <div class="container">
+             <strong>{{ message|safe }}</strong>
         </div>
     {% endfor %}
 {% else %}
@@ -36,7 +40,12 @@
             <input class="btn-main" type="file" name="file">
             </label>
             <p>Only accepts .csv file</p>
-            <button class="btn btn-primary" type-="submot">Upload</button>
+            <button class="btn btn-success" type-="submit">Upload</button>
+            <button class="btn btn-primary">
+                <a href="/" download="test.csv">Download Format</a>
+            </button>
+
+
         </div>
     </div>
 

@@ -26,4 +26,6 @@ urlpatterns = [
     path('contact', views.create, name='contact_data'),
     path('form', views.savedata, name='save_data'),
     path('sheetapi/', views.main, name='main'),
+    path('sync/', views.update_sheet),
+    path('upload-csv/', views.contact_upload, name='contact_upload'),
 ]

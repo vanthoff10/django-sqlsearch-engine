@@ -5,14 +5,20 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-from django.shortcuts import render
+import csv, io
+from django.shortcuts import render, HttpResponse
 from django.template.response import TemplateResponse
+from django.contrib import messages
 from .models import FormData, DataSchema
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 
 # Create your views here.
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+
 
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '1buqR2OkUJdPA63NYh2WZWRoCQ4-P_8JP-7vogko3oYA'
@@ -87,8 +93,31 @@ def savedata(request):
         dataschema_obj.l_name = datafield12
         dataschema_obj.city_name = datafield4
 
+
         form_data_obj.save()
         dataschema_obj.save()
+
+        creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+
+        client = gspread.authorize(creds)
+
+        sheet = client.open("info")
+        worksheet = sheet.worksheet('ashwin')
+
+        data = worksheet.get_all_records()
+
+        # numRows = sheet.row_count
+        data_len = len(data)
+
+
+        insertRow = [datafield1, datafield2, datafield4]
+        worksheet.insert_row(insertRow, data_len + 2)
+
+        # pprint(data)
+        # print(numRows)
+        print(len(data))
+
+
 
         return TemplateResponse(request, 'home.html')
 
@@ -268,5 +297,84 @@ def main(request):
             sheetdata_obj.save()
 
     return TemplateResponse(request, 'home.html', {'info': values_greg})
+
+
+def update_sheet(request):
+
+    creds = None
+    # The file token.pickle stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
+            creds = pickle.load(token)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'credentials.json', SCOPES)
+            creds = flow.run_local_server()
+        # Save the credentials for the next run
+        with open('token.pickle', 'wb') as token:
+            pickle.dump(creds, token)
+
+    service = build('sheets', 'v4', credentials=creds)
+
+    sheet = service.spreadsheets()
+    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                range=SAMPLE_RANGE_NAME).execute()
+
+    num_rows = len(result)
+    print(num_rows)
+
+    allData = DataSchema.objects.all()
+
+
+    for company in allData:
+        googlesheet = []
+        googlesheet = company.company_name
+        googlesheet = company.company_name
+        googlesheet = company.company_name
+        googlesheet = company.company_name
+
+        print(googlesheet)
+
+    return HttpResponse("hello cow")
+
+
+def contact_upload(request):
+    template = "contact_upload.html"
+
+    prompt = {
+        'order': 'Order of CSV should be company_name, company_url, company_email, f_name, l_name, city_name'
+    }
+
+    if request.method == "GET":
+        return render(request, template, prompt)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'This is not a csv file')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = DataSchema.objects.update_or_create(
+            company_name=column[0],
+            company_url = column[1],
+            company_email = column[2],
+            f_name = column[3],
+            l_name = column[4],
+            city_name = column[5]
+        )
+
+    context = {}
+
+    return render(request, template, context)
+
 
 

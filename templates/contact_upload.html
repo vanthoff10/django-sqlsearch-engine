@@ -67,8 +67,8 @@ a{
 {% if messages %}
     {% for message in messages %}
         <div class="alert alert-success" role="alert">
-             <strong>{{ message}}</strong>
-        </div>
+  {{message}} <a href="#" class="alert-link">successfully</a>
+</div>
     {% endfor %}
 {% endif %}
 

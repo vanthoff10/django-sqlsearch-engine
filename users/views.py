@@ -96,7 +96,7 @@ def savedata(request):
 
         form_data_obj.save()
         dataschema_obj.save()
-        messages.success(request, 'Form successfully submitted')
+        messages.success(request, 'Form submitted successfully')
 
         creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
 
@@ -377,7 +377,8 @@ def contact_upload(request):
                 l_name = column[4],
                 city_name = column[5]
             )
-        messages.success(request, 'File Uploaded Successfully')
+
+    messages.success(request, 'File Uploaded')
     context = {}
 
     return render(request, template, context)

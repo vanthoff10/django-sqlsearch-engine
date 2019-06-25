@@ -96,6 +96,7 @@ def savedata(request):
 
         form_data_obj.save()
         dataschema_obj.save()
+        messages.success(request, 'Form successfully submitted')
 
         creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
 
@@ -353,6 +354,7 @@ def contact_upload(request):
 
     if request.method == "GET":
         return render(request, template, prompt)
+    # empty_lines = 0
 
     csv_file = request.FILES['file']
 
@@ -363,18 +365,25 @@ def contact_upload(request):
     io_string = io.StringIO(data_set)
     next(io_string)
     for column in csv.reader(io_string, delimiter=',', quotechar="|"):
-        _, created = DataSchema.objects.update_or_create(
-            company_name=column[0],
-            company_url = column[1],
-            company_email = column[2],
-            f_name = column[3],
-            l_name = column[4],
-            city_name = column[5]
-        )
+        if not column:
+            continue
+        else:
 
+            _, created = DataSchema.objects.update_or_create(
+                company_name = column[0],
+                company_url = column[1],
+                company_email = column[2],
+                f_name = column[3],
+                l_name = column[4],
+                city_name = column[5]
+            )
+        messages.success(request, 'File Uploaded Successfully')
     context = {}
 
     return render(request, template, context)
+
+
+
 
 
 

@@ -2,47 +2,60 @@
 <style>
 .csv_div{
     background: #f7f8f9;
-    border: 2px solid #d9dde0;
-    border-radius: 5px;
+    border: 5px solid #d9dde0;
+    border-radius: 6px;
     max-width: 80%;
     width:52%;
+    padding:7px;
 }
-
 .btn-main {
     border: 2px solid #888888;
     border-radius: 5px;
     width: 220px;
 }
-
 .form-upload {
     margin: 25px;
 }
-
 a{
     color: white;
 }
+.btn {
+    margin:3px;
+}
+
+.alert {
+
+    margin: 10px;
+    -webkit-animation: cssAnimation 3s forwards;
+    animation: cssAnimation 3s forwards;
+}
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    50%  {opacity: 0.7;}
+    90%  {opacity: 0.4;}
+    100% {opacity: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {opacity: 1;}
+    50%  {opacity: 0.7;}
+    90%  {opacity: 0.4;}
+    100% {opacity: 0;}
+}
 </style>
 
-{% if messages %}
-    {% for message in messages %}
-        <div class="container">
-             <strong>{{ message|safe }}</strong>
-        </div>
-    {% endfor %}
-{% else %}
-{{ order }}
+
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
     <div class="d-flex justify-content-center align-items-center container csv_div">
         <div class="col form-upload">
             <label><strong>Upload a file</strong>
-            <input class="btn-main" type="file" name="file">
+            <input class="btn-main" type="file" name="file" required>
             </label>
             <p>Only accepts .csv file</p>
             <button class="btn btn-success" type-="submit">Upload</button>
             <button class="btn btn-primary">
-                <a href="/" download="test.csv">Download Format</a>
+                <a href="http://download1592.mediafire.com/w3b78q47dyng/4j595c9b5pnk9ne/format.csv" download>Download Format</a>
             </button>
 
 
@@ -51,4 +64,11 @@ a{
 
 </form>
 
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+             <strong>{{ message}}</strong>
+        </div>
+    {% endfor %}
 {% endif %}
+

@@ -123,7 +123,30 @@ input[type="text"] {
   padding-top:15px;
 }
 
+.message-alert {
+  margin:20px;
+
+
+}
+.alert {
+    -webkit-animation: cssAnimation 3s forwards;
+    animation: cssAnimation 3s forwards;
+}
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    50%  {opacity: 0.7;}
+    90%  {opacity: 0.4;}
+    100% {opacity: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {opacity: 1;}
+    50%  {opacity: 0.7;}
+    90%  {opacity: 0.4;}
+    100% {opacity: 0;}
+}
 </style>
+
+
 
 {% if user.is_authenticated %}
   <nav class="navbar navbar-light bg-light">
@@ -163,6 +186,14 @@ input[type="text"] {
   </div>
 </div>
 
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success message-alert" role="alert">
+             <strong>{{ message}}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
 
 <div class="container">
 
@@ -284,3 +315,4 @@ input[type="text"] {
   <p class="text-center"><a href="{% url 'login' %}">login</a></p>
 {% endif %}
 {% endblock %}
+

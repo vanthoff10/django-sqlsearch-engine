@@ -22,7 +22,7 @@ from users import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('django.contrib.auth.urls')),
-    path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('home', TemplateView.as_view(template_name='home.html'), name='home'),
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('contact', views.create, name='contact_data'),
     path('form', views.savedata, name='save_data'),

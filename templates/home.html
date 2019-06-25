@@ -188,7 +188,13 @@ li {
 <!--    </li>-->
 
 
-
+{% if messages %}
+    {% for message in messages %}
+         <div class="alert alert-success" role="alert">
+              {{message}} <a href="#" class="alert-link">successfully</a>
+         </div>
+    {% endfor %}
+{% endif %}
 
 
 <div class="col-8  border-class container" style="margin-top: 8%;">
@@ -216,13 +222,7 @@ li {
 </div>
 
 
-{% if messages %}
-    {% for message in messages %}
-         <div class="alert alert-success" role="alert">
-              {{message}} <a href="#" class="alert-link">successfully</a>
-         </div>
-    {% endfor %}
-{% endif %}
+
 
 <div class="container">
 

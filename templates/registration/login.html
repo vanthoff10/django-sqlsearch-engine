@@ -185,7 +185,7 @@ input[type=submit]:active {
 
 
 <div class="login">
-  <h1>Login to Web App</h1>
+  <h1>Login to Outbound App</h1>
   <form id="login-form" method="post" action="">
       {% csrf_token %}
 
@@ -228,7 +228,7 @@ input[type=submit]:active {
 </div>
 
 <div class="login-help">
-  <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
+  <p>Forgot your password? <a name="password_reset" href="{% url 'password_reset' %}">Click here to reset it</a>.</p>
 </div>
 
 
